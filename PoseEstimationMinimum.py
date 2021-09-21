@@ -27,10 +27,19 @@ while True:
 
 	results = pose.process(imgRGB)
 
-	print(results.pose_landmarks) # this would have an x , y , z and visibility 
+	# print(results.pose_landmarks) # this would have an x , y , z and visibility 
 
 	if results.pose_landmarks:
 		mpDraw.draw_landmarks( img, results.pose_landmarks, mpPose.POSE_CONNECTIONS)
+
+		for id, lm in enumerate(results.pose_landmarks.landmark):
+			h , w , c = img.shape
+
+			cx , cy = int(lm.x*w), int(lm.y*h) 
+
+			cv2.circle(img, (cx,cy) , 5, (255,0,0) , cv2.FILLED)
+
+
 	
 
 
