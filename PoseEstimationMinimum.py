@@ -3,6 +3,12 @@ import mediapipe as mp
 import time
 
 
+def rescale_frame(frame, percent=75):
+	width = int(frame.shape[1] * percent/ 100)
+	height = int(frame.shape[0] * percent/ 100)
+	dim = (width, height)
+	return cv2.resize(frame, dim, interpolation =cv2.INTER_AREA)
+
 
 mpPose = mp.solutions.pose #create object to detect pose
 pose = mpPose.Pose()
@@ -36,7 +42,9 @@ while True:
 
 	cv2.putText(img, str(int(fps)),(70,50), cv2.FONT_HERSHEY_PLAIN,3, (255,0,0),3)
 
-	cv2.imshow("Image" , img)
+	frame75 = rescale_frame(img , percent=50)
+
+	cv2.imshow("Image" , frame75)
 
 	cv2.waitKey(1)
 
