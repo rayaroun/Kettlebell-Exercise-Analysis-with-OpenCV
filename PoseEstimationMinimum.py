@@ -24,7 +24,7 @@ while True:
 	print(results.pose_landmarks) # this would have an x , y , z and visibility 
 
 	if results.pose_landmarks:
-		mpDraw.draw_landmarks( img, results.pose_landmarks)
+		mpDraw.draw_landmarks( img, results.pose_landmarks, mpPose.POSE_CONNECTIONS)
 	
 
 
@@ -39,3 +39,4 @@ while True:
 	cv2.imshow("Image" , img)
 
 	cv2.waitKey(1)
+
