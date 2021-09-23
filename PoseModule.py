@@ -101,7 +101,11 @@ class PoseDetector():
 		# calculate angle
 
 		angle = math.degrees(math.atan2(y3-y2, x3-x2) - math.atan2(y1-y2,x1-x2))
-		print(angle)
+		
+		if angle < 0 :
+			angle += 360
+		
+		# print(angle)
 
 
 		if draw:
@@ -115,8 +119,10 @@ class PoseDetector():
 			cv2.circle(img, (x2, y2) , 5, (0,0,255) , cv2.FILLED)
 			cv2.circle(img, (x3, y3) , 5, (0,0,255) , cv2.FILLED)
 
+			cv2.putText(img, str("Angle : " + str(int(angle))), (20, 50), cv2.FONT_HERSHEY_PLAIN,2,(255,0,255) , 2  )
 
 
+		return angle
 
 def main():
 	cap = cv2.VideoCapture('Media/video (1).mp4')
